@@ -28,7 +28,7 @@ public class CarsHelper {
             connection = DataConnection.getConnection();
             assert connection != null;
             carsStatement = connection.prepareStatement("select * from cars");
-                        ResultSet rs = carsStatement.executeQuery();
+            ResultSet rs = carsStatement.executeQuery();
 
             while(rs.next()) {
                 String carManufacturer = rs.getString("carManufacturer");

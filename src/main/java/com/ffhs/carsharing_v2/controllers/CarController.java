@@ -8,12 +8,14 @@ import com.ffhs.carsharing_v2.helpers.CarsHelper;
 import com.ffhs.carsharing_v2.pojos.Cars;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
 
 
 @Named
+@RequestScoped
 public class CarController implements Serializable {
 
     private static final long serialVersionUID = 1L;
