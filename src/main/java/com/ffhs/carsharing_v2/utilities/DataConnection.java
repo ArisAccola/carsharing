@@ -7,9 +7,8 @@ public class DataConnection
     {
         try {
             // Set up connection
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/carsharing", "root", "root");
-            return connection;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/carsharing", "root", "root");
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + ": " + e.getMessage());
             return null;
@@ -21,7 +20,7 @@ public class DataConnection
         try {
             connection.close();
         } catch (Exception e) {
-
+            System.out.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
 }

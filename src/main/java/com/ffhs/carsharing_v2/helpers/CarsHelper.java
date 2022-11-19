@@ -3,7 +3,6 @@ package com.ffhs.carsharing_v2.helpers;
 import com.ffhs.carsharing_v2.pojos.Cars;
 import com.ffhs.carsharing_v2.utilities.DataConnection;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,25 +11,13 @@ import java.util.List;
 
 public class CarsHelper {
     private static CarsHelper instance;
-    /*private DataSource datasource;
-    private String jndiName = "java:comp/env/jdbc/employee_tracker";*/
 
     public static CarsHelper getInstance() throws Exception {
         if (instance == null) {
             instance = new CarsHelper();
         }
-        return instance;
+            return instance;
     }
-
-    /*private CarsHelper() throws Exception {
-        datasource = getDataSource();
-    }
-
-    private DataSource getDataSource() throws NamingException {
-        Context context = new InitialContext();
-        DataSource datasource = (DataSource) context.lookup(jndiName);
-        return datasource;
-    }*/
 
     public List<Cars> getCars() throws Exception {
         List<Cars> cars = new ArrayList<>();
@@ -39,6 +26,7 @@ public class CarsHelper {
 
         try {
             connection = DataConnection.getConnection();
+            assert connection != null;
             carsStatement = connection.prepareStatement("select * from cars");
                         ResultSet rs = carsStatement.executeQuery();
 
@@ -51,6 +39,8 @@ public class CarsHelper {
 
                 Cars car = new Cars(carManufacturer, carModel,carType,plateNumber,status);
                 cars.add(car);
+
+                System.out.println(carManufacturer + " " + carModel + " " + carType + " " + plateNumber + " " + status);
             }
             return cars;
         }
