@@ -2,9 +2,10 @@ package com.ffhs.carsharing_v2.controllers;
 
 import java.io.*;
 
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.servlet.*;
+import jakarta.inject.Named;
 import jakarta.servlet.http.*;
 
 import com.ffhs.carsharing_v2.helpers.LoginHelper;
@@ -47,41 +48,24 @@ public class LoginController implements Serializable {
         this.password = password;
     }
 
-    /**
-     * @return message
-     */
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * @param message set new message
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    /**
-     * logout event, invalidate current session
-     *
-     * @return index.xhtml
-     */
-    public String logout() {
-        HttpSession session = SessionUtils.getSession();
-        session.invalidate();
-        return "index";
-    }
-
+    @Named
+    @SessionScoped
     public String login() {
         boolean valid = LoginHelper.validateUserLogin(username, password);
 
         if (valid) {
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("username", username);
-            return "home";
+
+            if(username.equals("admin")){
+                return "/admin/admin.xhtml?faces-redirect=true";
+            } else {
+                return "home.xhtml?faces-redirect=true";
+            }
+
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Password", "Please enter correct Username and Password"));
-            return "index";
+            return "index.xhtml?faces-redirect=true";
         }
     }
 }

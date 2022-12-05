@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Car Reservation System - Car List</title>
+    <h:outputStylesheet name="css/footer.css" />
+    <h:outputStylesheet name="css/content.css" />
+    <h:outputStylesheet name="css/header.css" />
+    <h:outputStylesheet name="css/table.css" />
+</h:head>
+<h:body>
+    <!-- Header -->
+    <ui:insert name="header">
+        <ui:include src="../../WEB-INF/templates/commonHeaderAdmin.xhtml"> </ui:include>
+    </ui:insert>
+
+    <!-- Content -->
+    <div class="content">
+         <div>
+             <h2>Cars List</h2>
+             <h:dataTable value="#{carController.cars}" var="car">
+
+                 <h:column>
+                     <f:facet name="header">Manufacturer</f:facet>
+                     #{car.carManufacturer}
+                 </h:column>
+
+                 <h:column>
+                     <f:facet name="header">Model</f:facet>
+                     #{car.carModel}
+                 </h:column>
+
+                 <h:column>
+                     <f:facet name="header">Type</f:facet>
+                     #{car.carType}
+                 </h:column>
+
+                 <h:column>
+                     <f:facet name="header">Plate Number</f:facet>
+                     #{car.plateNumber}
+                 </h:column>
+
+                 <h:column>
+                     <f:facet name="header">Status</f:facet>
+                     #{car.status}
+                 </h:column>
+
+                 <h:column>
+                     <f:facet name="header">Edit</f:facet>
+                 </h:column>
+
+                 <h:column>
+                     <f:facet name="header">Delete</f:facet>
+                 </h:column>
+
+             </h:dataTable>
+
+             <h:messages />
+         </div>
+    </div>
+
+    <!-- Footer -->
+    <ui:insert name="footer">
+        <ui:include src="../../WEB-INF/templates/commonFooter.xhtml"> </ui:include>
+    </ui:insert>
+</h:body>
+
+</html>

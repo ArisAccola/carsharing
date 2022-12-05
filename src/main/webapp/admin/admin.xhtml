@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Car Reservation System - Home</title>
+    <title>Car Reservation System - Admin Panel</title>
     <h:outputStylesheet name="css/footer.css" />
     <h:outputStylesheet name="css/content.css" />
     <h:outputStylesheet name="css/header.css" />
@@ -14,16 +14,25 @@
 </h:head>
 <h:body>
     <ui:insert name="header">
-    <ui:include src="WEB-INF/templates/commonHeader.xhtml"> </ui:include>
+        <ui:include src="../WEB-INF/templates/commonHeaderAdmin.xhtml"> </ui:include>
     </ui:insert>
 
     <!-- Content -->
     <div class="content">
+        <div class="flexcontainer">
+            <h2 style="width: 100%;  margin-bottom: 20px;">Welcome Admin</h2>
+            <div>Please select one of the below links, if you want to edit the entries.</div>
+        </div>
+        <div class="subnav">
+            <div> <h:link value="Users" outcome="users" /> </div>
+            <div> <h:link value="Cars" outcome="cars" /> </div>
+            <div> <h:link value="Reservations" outcome="reservations" /> </div>
+        </div>
 
     </div>
 
     <ui:insert name="footer">
-        <ui:include src="WEB-INF/templates/commonFooter.xhtml"> </ui:include>
+        <ui:include src="../WEB-INF/templates/commonFooter.xhtml"> </ui:include>
     </ui:insert>
 </h:body>
 

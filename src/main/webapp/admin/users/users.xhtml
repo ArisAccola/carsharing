@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Car Reservation System - User List</title>
+    <h:outputStylesheet name="css/footer.css" />
+    <h:outputStylesheet name="css/content.css" />
+    <h:outputStylesheet name="css/header.css" />
+    <h:outputStylesheet name="css/table.css" />
+</h:head>
+<h:body>
+    <!-- Header -->
+    <ui:insert name="header">
+        <ui:include src="../../WEB-INF/templates/commonHeaderAdmin.xhtml"> </ui:include>
+    </ui:insert>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="flexcontainer">
+            <h2>User List</h2>
+        </div>
+
+        <div class="table">
+            <h:dataTable value="#{users.user}" var="user">
+
+                <h:column>
+                    <f:facet name="header">Username</f:facet>
+                    #{user.username}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Password</f:facet>
+                    #{user.password}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Edit</f:facet>
+                    <h:form>
+                        <h:commandButton action="#{users.editUser(user.id)}" value="Edit User"> </h:commandButton>
+                    </h:form>
+                </h:column>
+
+                <h:column>
+                <f:facet name="header">Delete</f:facet>
+                    <h:form>
+                        <h:commandButton action="#{users.deleteUser(user.id)}" value="Delete User"> </h:commandButton>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+
+            <h:messages />
+        </div>
+        <div class="flexcontainer">
+            <h:form>
+                <h:commandButton action="#{users.addUserForward()}" value="Add User"> </h:commandButton>
+            </h:form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <ui:insert name="footer">
+        <ui:include src="../../WEB-INF/templates/commonFooter.xhtml"> </ui:include>
+    </ui:insert>
+</h:body>
+
+</html>

@@ -10,20 +10,436 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>cars</managed-bean-name>
+        <managed-bean-class>com.ffhs.carsharing_v2.controllers.CarController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>users</managed-bean-name>
+        <managed-bean-class>com.ffhs.carsharing_v2.controllers.UserController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Managed-Bean for Logout -->
+    <managed-bean>
+        <managed-bean-name>logout</managed-bean-name>
+        <managed-bean-class>com.ffhs.carsharing_v2.controllers.LogoutController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Navigation Rules from home.xhtml -->
     <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
+        <from-view-id>/home.xhtml</from-view-id>
+
+        <!-- Forward to Reserve Car -->
+        <navigation-case>
+            <from-outcome>reservation</from-outcome>
+            <to-view-id>/reserve.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Forward to Admin Panel -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <!-- Navigation Rules from admin.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/admin.xhtml</from-view-id>
+
+        <!-- Home -->
         <navigation-case>
             <from-outcome>home</from-outcome>
             <to-view-id>/home.xhtml</to-view-id>
         </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
     </navigation-rule>
 
+    <!-- Navigation Rules from users.xhtml -->
     <navigation-rule>
-        <from-view-id>/home.xhtml</from-view-id>
+        <from-view-id>/admin/users/users.xhtml</from-view-id>
+
+        <!-- Home -->
         <navigation-case>
-            <from-outcome>reservation</from-outcome>
-            <to-view-id>/reservation.xhtml</to-view-id>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
         </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- AddUser -->
+        <navigation-case>
+            <from-outcome>addUser</from-outcome>
+            <to-view-id>/admin/users/addUser.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- EditUser -->
+        <navigation-case>
+            <from-outcome>editUser</from-outcome>
+            <to-view-id>/admin/users/editUser.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from editUsers.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/users/editUser.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from addUsers.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/users/addUser.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from cars.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/cars/cars.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- AddCar -->
+        <navigation-case>
+            <from-outcome>addCar</from-outcome>
+            <to-view-id>/admin/cars/addCar.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- EditCar -->
+        <navigation-case>
+            <from-outcome>editCar</from-outcome>
+            <to-view-id>/admin/cars/editCar.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from editCar.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/cars/editCar.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from addCar.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/cars/addCar.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from reservations.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/reservations/reservations.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- AddCar -->
+        <navigation-case>
+            <from-outcome>addCar</from-outcome>
+            <to-view-id>/admin/cars/addCar.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- EditCar -->
+        <navigation-case>
+            <from-outcome>editCar</from-outcome>
+            <to-view-id>/admin/cars/editCar.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from editReservation.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/reservations/editReservation.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from addReservation.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/reservations/addReservation.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
     </navigation-rule>
 
 </faces-config>

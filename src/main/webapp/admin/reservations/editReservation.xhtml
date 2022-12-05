@@ -6,24 +6,23 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>Car Reservation System - Home</title>
+    <title>Car Reservation System - Reservation</title>
     <h:outputStylesheet name="css/footer.css" />
     <h:outputStylesheet name="css/content.css" />
     <h:outputStylesheet name="css/header.css" />
     <h:outputStylesheet name="css/table.css" />
 </h:head>
 <h:body>
+    <!-- Header -->
     <ui:insert name="header">
-    <ui:include src="WEB-INF/templates/commonHeader.xhtml"> </ui:include>
+        <ui:include src="../../WEB-INF/templates/commonHeaderAdmin.xhtml"> </ui:include>
     </ui:insert>
 
     <!-- Content -->
-    <div class="content">
 
-    </div>
-
+    <!-- Footer -->
     <ui:insert name="footer">
-        <ui:include src="WEB-INF/templates/commonFooter.xhtml"> </ui:include>
+        <ui:include src="../../WEB-INF/templates/commonFooter.xhtml"> </ui:include>
     </ui:insert>
 </h:body>
 

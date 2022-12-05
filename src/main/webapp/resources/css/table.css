@@ -1,0 +1,40 @@
+/* --------------------------------
+
+💡 How to make the table header sticky in CSS
+🔗 https://codyhouse.co/nuggets/sticky-table-header
+
+-------------------------------- */
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-spacing: 0;
+    border: none;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+th, td { /* cell */
+    padding: 10px;
+}
+
+th { /* header cell */
+    font-weight: 700;
+    text-align: left;
+    color: black;
+    border-bottom: 1px solid black;
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
+td { /* body cell */
+    color: black;
+    text-align: left;
+}

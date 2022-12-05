@@ -1,0 +1,108 @@
+html{
+    width: 100%;
+    height:100%;
+}
+body{
+    background: rgb(0, 102, 255);
+    height: 100vh;
+    width: 100vh;
+    padding:0;
+    margin:0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.content{
+    width: calc(100% - 40px);
+    height: calc(80% - 40px);
+    position: absolute;
+    top: calc(10% + 20px);
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    color: white;
+}
+
+.content .flexcontainer {
+    display: flex;
+    align-items: center;
+    height: 10%;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.content .subnav {
+    height: 90%;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content .subnav > div {
+    width: calc(33.3333% - 80px);
+    height: calc(100% - 80px);
+    margin: 40px;
+    font-size: 200%;
+    background: #03a9f4;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.content .subnav > div > a {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.content .subnav > div > a:hover, a:visited {
+    color: white;
+}
+
+.content .table {
+    height: 80%;
+    display: block;
+    overflow-x: auto;
+}
+
+.content .table input[type="submit"] {
+    border: solid black 1px;
+    outline: none;
+    color: black;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: inherit;
+}
+
+.content .flexcontainer input[type="submit"] {
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #03a9f4;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: inherit;
+}
+
+.content h2 {
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+
+/* do not show scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+.vertical {
+    border-left: 6px solid black;
+    height: 200px;
+    position:absolute;
+    left: 50%;
+}

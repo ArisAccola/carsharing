@@ -14,8 +14,7 @@ public class AuthorizationFilter implements Filter
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException
-    {
+    public void init(FilterConfig filterConfig) throws ServletException {
 
     }
 
@@ -29,22 +28,22 @@ public class AuthorizationFilter implements Filter
             HttpSession ses = reqt.getSession(false);
 
             String reqURI = reqt.getRequestURI();
-            if (reqURI.indexOf("/index.xhtml") >= 0
-                    || reqURI.indexOf("/home.xhtml") >=0
+            if (reqURI.contains("/index.xhtml")
                     || (ses != null && ses.getAttribute("username") != null)
-                    || reqURI.indexOf("/public/") >= 0
                     || reqURI.contains("jakarta.faces.resource"))
                 chain.doFilter(request, response);
             else
+            {
                 resp.sendRedirect(reqt.getContextPath() + "/index.xhtml");
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     @Override
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 }

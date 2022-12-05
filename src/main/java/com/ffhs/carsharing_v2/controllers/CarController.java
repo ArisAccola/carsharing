@@ -1,53 +1,51 @@
 package com.ffhs.carsharing_v2.controllers;
 
+import com.ffhs.carsharing_v2.helpers.CarsHelper;
+import com.ffhs.carsharing_v2.dto.Car;
+
+import jakarta.faces.view.ViewScoped;
+import jakarta.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import com.ffhs.carsharing_v2.helpers.CarsHelper;
-import com.ffhs.carsharing_v2.pojos.Cars;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
-import jakarta.inject.Named;
-
-
+/**
+ * Function CarController
+ * Bean for Front-End implementation
+ */
 @Named
-@RequestScoped
+@ViewScoped
 public class CarController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private List<Cars> cars;
     private final CarsHelper carsHelper;
 
-    @PostConstruct
-    public void setup() {
-        if (cars == null)
-        {
-            loadCars();
-        }
-    }
-    public CarController() throws Exception {
-        cars = new ArrayList<>();
-        carsHelper = CarsHelper.getInstance();
-    }
-
-    public List<Cars> getCars() {
-        return cars;
-    }
-
-    public void loadCars () {
+    /**
+     * Constructor
+     */
+    public CarController() {
         try {
-            cars = carsHelper.getCars();
-        }catch (Exception e) {
-            addErrorMessage (e);
+            carsHelper = CarsHelper.getInstance();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private void addErrorMessage(Exception ex) {
-        FacesMessage message = new FacesMessage(ex.getMessage());
-        FacesContext.getCurrentInstance().addMessage(null, message);
+    /**
+     * Get list of Users from Database
+     *
+     * @return List<Cars> cars or null if error
+     */
+    public List<Car> getCars() {
+        try {
+            return carsHelper.loadCars();
+        } catch (Exception e) {
+            System.out.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return null;
     }
+
+    // TODO public void addCars() {}
+
+    // TODO public void editCars() {}
 }
