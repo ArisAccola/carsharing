@@ -14,18 +14,11 @@ public class UserController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final UserHelper userHelper;
-
     /**
      * Constructor
      */
     public UserController() {
-
-       try {
-            userHelper = UserHelper.getInstance();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        super();
     }
 
     User userDTO = new User();
@@ -49,7 +42,7 @@ public class UserController implements Serializable {
      */
     public List<User> getUser() {
         try {
-            return userHelper.loadUsers();
+            return UserHelper.loadUsers();
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -72,7 +65,7 @@ public class UserController implements Serializable {
     public String editUser(int userId){
 
         try {
-            userHelper.loadEditUser(userId);
+            UserHelper.loadEditUser(userId);
             return "editUser?faces-redirect=true";
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + ": " + e.getMessage());
@@ -82,7 +75,7 @@ public class UserController implements Serializable {
 
    public String updateUser(int userId, String username, String password){
 
-        boolean valid = userHelper.updateUser(userId, username, password);
+        boolean valid = UserHelper.updateUser(userId, username, password);
 
         if(valid)
         {

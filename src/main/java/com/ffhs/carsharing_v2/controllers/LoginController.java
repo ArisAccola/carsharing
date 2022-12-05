@@ -2,6 +2,7 @@ package com.ffhs.carsharing_v2.controllers;
 
 import java.io.*;
 
+import com.ffhs.carsharing_v2.dto.User;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -15,42 +16,20 @@ import com.ffhs.carsharing_v2.utilities.SessionUtils;
 public class LoginController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String username;
-    private String password;
 
-    private String message;
+    User userDTO = new User();
 
-    /**
-     * @return username
-     */
-    public String getUsername() {
-        return username;
+    public User getUserDTO(){
+        return userDTO;
     }
 
-    /**
-     * @param username set new username
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     * @return password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password set new password
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserDTO(User user) {
+        this.userDTO = user;
     }
 
     @Named
     @SessionScoped
-    public String login() {
+    public String login(String username, String password) {
         boolean valid = LoginHelper.validateUserLogin(username, password);
 
         if (valid) {

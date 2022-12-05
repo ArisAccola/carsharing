@@ -14,14 +14,14 @@
         <h2>Login</h2>
         <h:form id="loginForm">
             <div class="inputBox">
-                <h:inputText id="username" value="#{login.username}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter your Username')" p:oninput="this.setCustomValidity('')"> </h:inputText>
+                <h:inputText id="username" value="#{login.userDTO.username}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter your Username')" p:oninput="this.setCustomValidity('')"> </h:inputText>
                 <h:outputLabel for="username">Username</h:outputLabel>
             </div>
             <div class="inputBox">
-                <h:inputSecret id="password" value="#{login.password}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter your Password')" p:oninput="this.setCustomValidity('')"> </h:inputSecret>
+                <h:inputSecret id="password" value="#{login.userDTO.password}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter your Password')" p:oninput="this.setCustomValidity('')"> </h:inputSecret>
                 <h:outputLabel for="password">Password</h:outputLabel>
             </div>
-            <h:commandButton action="#{login.login()}" value="Login"> </h:commandButton>
+            <h:commandButton action="#{login.login(login.userDTO.username, login.userDTO.password)}" value="Login"> </h:commandButton>
         </h:form>
     </div>
 </h:body>
