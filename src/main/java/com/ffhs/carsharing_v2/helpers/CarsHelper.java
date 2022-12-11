@@ -45,9 +45,13 @@ public class CarsHelper {
         }
     }
 
-    static List<Car> getCars(List<Car> cars, PreparedStatement carsStatement) throws SQLException {
+    public static List<Car> getCars(List<Car> cars, PreparedStatement carsStatement) throws SQLException {
         ResultSet rs = carsStatement.executeQuery();
 
+        return getCars(cars, rs);
+    }
+
+    public static List<Car> getCars(List<Car> cars, ResultSet rs) throws SQLException {
         while(rs.next()) {
             int carId = rs.getInt("carId");
             String carManufacturer = rs.getString("carManufacturer");

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.ffhs.carsharing_v2.helpers.CarsHelper.getCars;
 import static com.ffhs.carsharing_v2.utilities.SessionUtils.getUsername;
 
 public class ReservationHelper {
@@ -48,7 +49,7 @@ public class ReservationHelper {
         try {
             connection = DataConnection.getConnection();
             assert connection != null;
-            carsStatement = connection.prepareStatement("select * from cars where cars.carId not in(select r.carId from reservations as r where r.start_date >= ? and r.end_date <= ?)");
+            carsStatement = connection.prepareStatement("select * from cars where cars.carId not in(select r.carId from reservations as r where r.start_date >= ? and r.end_date <= ?) and cars.status = 'available'");
 
             carsStatement.setDate(1, new java.sql.Date(startDate.getTime()));
             carsStatement.setDate(2, new java.sql.Date(endDate.getTime()));
@@ -57,20 +58,7 @@ public class ReservationHelper {
 
             System.out.println(carsStatement);
 
-            while(rs.next()) {
-                int carId = rs.getInt("carId");
-                String carManufacturer = rs.getString("carManufacturer");
-                String carModel = rs.getString("carModel");
-                String carType = rs.getString("carType");
-                String plateNumber = rs.getString("plateNumber");
-                String status = rs.getString("status");
-
-                //System.out.println(carManufacturer + " " + carModel + " " + carType + " " + plateNumber + " " + status);
-
-                Car car = new Car(carId, carManufacturer, carModel, carType, plateNumber, status);
-                cars.add(car);
-            }
-            return cars;
+            return getCars(cars, rs);
         }
         catch(Exception e) {
             System.out.println(e.getClass().getName() + ": " + e.getMessage());
@@ -175,8 +163,8 @@ public class ReservationHelper {
             // Add parameters to the ?'s in the prepareStatement and execute
             createCarStatement.setString(1,username);
             createCarStatement.setInt(2, carId);
-            createCarStatement.setDate(2, new java.sql.Date(start_date.getTime()));
-            createCarStatement.setDate(2, new java.sql.Date(end_date.getTime()));
+            createCarStatement.setDate(3, new java.sql.Date(start_date.getTime()));
+            createCarStatement.setDate(4, new java.sql.Date(end_date.getTime()));
 
             rs =  createCarStatement.executeUpdate();
 

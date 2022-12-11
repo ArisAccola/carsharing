@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
+import static com.ffhs.carsharing_v2.utilities.SessionUtils.getSession;
+
 @Named
 @SessionScoped
 public class ReservationController implements Serializable {
@@ -89,20 +91,7 @@ public class ReservationController implements Serializable {
         return "addReservation.xhtml?faces-redirect=true";
     }
 
-    public String addReservation(String username, int carId, Date start_date, Date end_date){
-
-        boolean valid = ReservationHelper.createReservation(username, carId, start_date, end_date);
-
-        if(valid && username.equals("admin")){
-            return "reservations";
-        } else if (valid) {
-            return "home";
-        } else {
-            return "error";
-        }
-    }
-
-    public String editReservation(int reservationId){
+   public String editReservation(int reservationId){
 
         try {
             ReservationHelper.loadEditReservation(reservationId);
@@ -119,7 +108,7 @@ public class ReservationController implements Serializable {
 
         System.out.println(username);
 
-        if(valid && username.equals("admin")){
+        if(valid && getSession().getAttribute("username").equals("admin")){
             return "reservations.xhtml?faces-redirect=true";
         } else if (valid) {
             return "home.xhtml?faces-redirect=true";
@@ -129,6 +118,23 @@ public class ReservationController implements Serializable {
     }
 
     public String forwardCarReservation() {
-        return "availableCars.xhtml?faces-redirect=true";
+        return "availableCarsAdmin.xhtml?faces-redirect=true";
+    }
+
+    public String forwardCarReservationAdmin() {
+        return "availableCarsAdmin.xhtml?faces-redirect=true";
+    }
+
+    public String reserveCar(String username, int carId, java.util.Date startDate, java.util.Date endDate){
+
+        boolean valid = ReservationHelper.createReservation(username, carId, startDate, endDate);
+
+        if(valid && getSession().getAttribute("username").equals("admin")){
+            return "reservations.xhtml?faces-redirect=true";
+        } else if (valid) {
+            return "home.xhtml?faces-redirect=true";
+        } else {
+            return "error.xhtml?faces-redirect=true";
+        }
     }
 }

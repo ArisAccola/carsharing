@@ -4,18 +4,21 @@
               xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                                   https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd">
 
+    <!-- Managed-Bean for Login Controller -->
     <managed-bean>
         <managed-bean-name>login</managed-bean-name>
         <managed-bean-class>com.ffhs.carsharing_v2.controllers.LoginController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
+    <!-- Managed-Bean for Car Controller -->
     <managed-bean>
         <managed-bean-name>cars</managed-bean-name>
         <managed-bean-class>com.ffhs.carsharing_v2.controllers.CarController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
+    <!-- Managed-Bean for User Controller -->
     <managed-bean>
         <managed-bean-name>users</managed-bean-name>
         <managed-bean-class>com.ffhs.carsharing_v2.controllers.UserController</managed-bean-class>
@@ -329,6 +332,42 @@
 
     </navigation-rule>
 
+    <!-- Navigation Rules from addCar.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/cars/addCar.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
     <!-- Navigation Rules from reservations.xhtml -->
     <navigation-rule>
         <from-view-id>/admin/reservations/reservations.xhtml</from-view-id>
@@ -416,6 +455,42 @@
     <!-- Navigation Rules from addReservation.xhtml -->
     <navigation-rule>
         <from-view-id>/admin/reservations/addReservation.xhtml</from-view-id>
+
+        <!-- Home -->
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/home.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Admin -->
+        <navigation-case>
+            <from-outcome>admin</from-outcome>
+            <to-view-id>/admin/admin.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Users-->
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/admin/users/users.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Cars -->
+        <navigation-case>
+            <from-outcome>cars</from-outcome>
+            <to-view-id>/admin/cars/cars.xhtml</to-view-id>
+        </navigation-case>
+
+        <!-- Reservation -->
+        <navigation-case>
+            <from-outcome>reservations</from-outcome>
+            <to-view-id>/admin/reservations/reservations.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <!-- Navigation Rules from availableCarsAdmin.xhtml -->
+    <navigation-rule>
+        <from-view-id>/admin/reservations/availableCarsAdmin.xhtml</from-view-id>
 
         <!-- Home -->
         <navigation-case>

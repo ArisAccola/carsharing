@@ -3,6 +3,7 @@ package com.ffhs.carsharing_v2.controllers;
 import com.ffhs.carsharing_v2.helpers.CarsHelper;
 import com.ffhs.carsharing_v2.dto.Car;
 
+import com.ffhs.carsharing_v2.helpers.ReservationHelper;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
@@ -29,7 +30,6 @@ public class CarController implements Serializable {
     public void setReservationDTO(Car car) {
         this.carDTO = car;
     }
-
 
     /**
      * Constructor

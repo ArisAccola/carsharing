@@ -6,15 +6,16 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-    <title>Car Reservation System - Home</title>
+    <title>Car Reservation System - Reservation</title>
     <h:outputStylesheet name="css/footer.css" />
     <h:outputStylesheet name="css/content.css" />
     <h:outputStylesheet name="css/header.css" />
     <h:outputStylesheet name="css/table.css" />
 </h:head>
 <h:body>
+    <!-- Header -->
     <ui:insert name="header">
-        <ui:include src="WEB-INF/templates/commonHeader.xhtml"> </ui:include>
+        <ui:include src="../../WEB-INF/templates/commonHeaderAdmin.xhtml"> </ui:include>
     </ui:insert>
 
     <!-- Content -->
@@ -62,7 +63,7 @@
                 <h:column>
                     <f:facet name="header">Reserve</f:facet>
                     <h:form>
-                        <h:commandButton action="#{reservation.reserveCar(username, res.carId, reservation.reservationDTO.start_date, reservation.reservationDTO.end_date)}" value="Reserve Car"> </h:commandButton>
+                        <h:commandButton action="#{reservation.reserveCar(users.userDTO.username, res.carId, reservation.reservationDTO.start_date, reservation.reservationDTO.end_date)}" value="Reserve Car"> </h:commandButton>
                     </h:form>
                 </h:column>
             </h:dataTable>
@@ -71,8 +72,9 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <ui:insert name="footer">
-        <ui:include src="WEB-INF/templates/commonFooter.xhtml"> </ui:include>
+        <ui:include src="../../WEB-INF/templates/commonFooter.xhtml"> </ui:include>
     </ui:insert>
 </h:body>
 

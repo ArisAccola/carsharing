@@ -41,6 +41,11 @@
                 </h:column>
 
                 <h:column>
+                    <f:facet name="header">Car Manufacturer</f:facet>
+                    #{res.car.carManufacturer}
+                </h:column>
+
+                <h:column>
                     <f:facet name="header">Car Model</f:facet>
                     #{res.car.carModel}
                 </h:column>
@@ -63,13 +68,6 @@
                 <h:column>
                     <f:facet name="header">End Date</f:facet>
                     #{res.end_date}
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">Edit</f:facet>
-                    <h:form>
-                        <h:commandButton action="#{reservation.editReservationUser(res.reservationId)}" value="Edit Reservation"> </h:commandButton>
-                    </h:form>
                 </h:column>
 
                 <h:column>
