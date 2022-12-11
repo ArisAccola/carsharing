@@ -14,24 +14,7 @@ import java.util.Map;
 
 public class UserHelper {
 
-    private static UserHelper instance;
-
-    public static UserHelper getInstance() throws Exception {
-
-        try{
-            if (instance == null) {
-            instance = new UserHelper();
-            }
-            return instance;
-        }catch (Exception e){
-            System.out.println(e.getClass().getName() + ": " + e.getMessage());
-            return null;
-        }
-
-
-    }
-
-    public static List<User> loadUsers() {
+   public static List<User> loadUsers() {
         List<User> users = new ArrayList<>();
         Connection connection = null;
         PreparedStatement userStatement = null;

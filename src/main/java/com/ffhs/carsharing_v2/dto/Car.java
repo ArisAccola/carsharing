@@ -33,6 +33,10 @@ public class Car {
         this.status = status;
     }
 
+    public Car(){
+        super();
+    }
+
     /**
      * Get Function for carId
      *

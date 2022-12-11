@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Car Reservation System - Home</title>
+    <h:outputStylesheet name="css/footer.css" />
+    <h:outputStylesheet name="css/content.css" />
+    <h:outputStylesheet name="css/header.css" />
+    <h:outputStylesheet name="css/table.css" />
+</h:head>
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="WEB-INF/templates/commonHeader.xhtml"> </ui:include>
+    </ui:insert>
+
+    <!-- Content -->
+    <div class="content">
+        <div class="flexcontainer">
+            <h2>Cars List</h2>
+        </div>
+
+        <div class="table">
+            <h:dataTable value="#{reservation.carsReservation}" var="res">
+
+                <h:column>
+                    <f:facet name="header">Manufacturer</f:facet>
+                    #{res.carId}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Manufacturer</f:facet>
+                    #{res.carManufacturer}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Model</f:facet>
+                    #{res.carModel}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Type</f:facet>
+                    #{res.carType}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Plate Number</f:facet>
+                    #{res.plateNumber}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    #{res.status}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Reserve</f:facet>
+                    <h:form>
+                        <h:commandButton action="#{cars.reserveCar(res.carId)}" value="Reserve Car"> </h:commandButton>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+
+            <h:messages />
+        </div>
+    </div>
+
+    <ui:insert name="footer">
+        <ui:include src="WEB-INF/templates/commonFooter.xhtml"> </ui:include>
+    </ui:insert>
+</h:body>
+
+</html>

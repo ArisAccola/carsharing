@@ -3,7 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <title>Car Reservation System - Home</title>
@@ -20,6 +20,70 @@
     <!-- Content -->
     <div class="content">
 
+        <div class="flexcontainer">
+            <h2 style="text-transform: capitalize">Welcome #{username}</h2>
+        </div>
+        <div class="flexcontainer">
+            <h2>Your Reservations</h2>
+        </div>
+
+        <div class="table">
+            <h:dataTable value="#{reservation.reservationUser}" var="res" rendered="#{not empty reservation.reservationUser}">
+
+                <h:column>
+                    <f:facet name="header">Reservation ID</f:facet>
+                    #{res.reservationId}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Car ID</f:facet>
+                    #{res.car.carId}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Car Model</f:facet>
+                    #{res.car.carModel}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Car Type</f:facet>
+                    #{res.car.carType}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Plate Number</f:facet>
+                    #{res.car.plateNumber}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Start Date</f:facet>
+                    #{res.start_date}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">End Date</f:facet>
+                    #{res.end_date}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Edit</f:facet>
+                    <h:form>
+                        <h:commandButton action="#{reservation.editReservationUser(res.reservationId)}" value="Edit Reservation"> </h:commandButton>
+                    </h:form>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Delete</f:facet>
+                    <h:form>
+                        <h:commandButton action="#{reservation.deleteReservationUser(res.reservationId)}" value="Delete Reservation"> </h:commandButton>
+                    </h:form>
+                </h:column>
+
+            </h:dataTable>
+
+            <h:outputText value="No current reservations available" rendered="#{empty reservation.reservationUser}"> </h:outputText>
+
+        </div>
     </div>
 
     <ui:insert name="footer">

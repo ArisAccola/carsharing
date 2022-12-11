@@ -5,7 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://xmlns.jcp.org/jsf/passthrough" lang="en">
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
     <title>Car Reservation System - Reservation</title>
@@ -25,30 +25,30 @@
         <h2>Add Car</h2>
         <h:form id="addCar">
             <div class="inputBox">
-                <h:inputText id="carManufacturer" value="" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Car Manufacturer')" p:oninput="this.setCustomValidity('')"> </h:inputText>
+                <h:inputText id="carManufacturer" value="#{cars.carDTO.carManufacturer}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Car Manufacturer')" p:oninput="this.setCustomValidity('')"> </h:inputText>
                 <h:outputLabel for="carManufacturer">Manufacturer</h:outputLabel>
             </div>
             <div class="inputBox">
-                <h:inputText id="carModel" value="" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Car Model')" p:oninput="this.setCustomValidity('')"> </h:inputText>
+                <h:inputText id="carModel" value="#{cars.carDTO.carModel}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Car Model')" p:oninput="this.setCustomValidity('')"> </h:inputText>
                 <h:outputLabel for="carModel">Model</h:outputLabel>
             </div>
             <div class="inputBox">
-                <h:inputText id="carType" value="" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Car Type')" p:oninput="this.setCustomValidity('')"> </h:inputText>
+                <h:inputText id="carType" value="#{cars.carDTO.carType}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Car Type')" p:oninput="this.setCustomValidity('')"> </h:inputText>
                 <h:outputLabel for="carType">Type</h:outputLabel>
             </div>
             <div class="inputBox">
-                <h:inputText id="plateNumber" value="" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Plate Number')" p:oninput="this.setCustomValidity('')"> </h:inputText>
+                <h:inputText id="plateNumber" value="#{cars.carDTO.plateNumber}" p:required="true" p:oninvalid="this.setCustomValidity('Please enter the Plate Number')" p:oninput="this.setCustomValidity('')"> </h:inputText>
                 <h:outputLabel for="plateNumber">Plate Number</h:outputLabel>
             </div>
             <div class="inputBox">
-                <h:selectOneMenu value="" id="status" p:required="true">
+                <h:selectOneMenu value="#{cars.carDTO.status}" id="status" p:required="true">
                     <f:selectItem itemValue="" itemLabel="" itemDisabled="true"/>
                     <f:selectItem itemValue="avialable" itemLabel="available" />
                     <f:selectItem itemValue="reserved" itemLabel="reserved" />
                 </h:selectOneMenu>
                 <h:outputLabel for="status">Status</h:outputLabel>
             </div>
-            <h:commandButton action="#{cars.addCar()}" value="Add Car"> </h:commandButton>
+            <h:commandButton action="#{cars.addCar(cars.carDTO.carManufacturer, cars.carDTO.carModel,cars.carDTO.carType,cars.carDTO.plateNumber, cars.carDTO.status)}" value="Add Car"> </h:commandButton>
         </h:form>
     </div>
 

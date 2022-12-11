@@ -21,8 +21,11 @@
 
     <!-- Content -->
     <div class="content">
-         <div>
-             <h2>Cars List</h2>
+        <div class="flexcontainer">
+            <h2>Cars List</h2>
+        </div>
+
+        <div class="table">
              <h:dataTable value="#{carController.cars}" var="car">
 
                  <h:column>
@@ -52,16 +55,27 @@
 
                  <h:column>
                      <f:facet name="header">Edit</f:facet>
+                     <h:form>
+                         <h:commandButton action="#{cars.editCar(car.carId)}" value="Edit Car"> </h:commandButton>
+                     </h:form>
                  </h:column>
 
                  <h:column>
                      <f:facet name="header">Delete</f:facet>
+                     <h:form>
+                         <h:commandButton action="#{cars.deleteCar(car.carId)}" value="Delete Car"> </h:commandButton>
+                     </h:form>
                  </h:column>
 
              </h:dataTable>
 
              <h:messages />
          </div>
+        <div class="flexcontainer">
+            <h:form>
+                <h:commandButton action="#{cars.addCarForward()}" value="Add Car"> </h:commandButton>
+            </h:form>
+        </div>
     </div>
 
     <!-- Footer -->

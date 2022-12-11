@@ -29,6 +29,13 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
+    <!-- Managed-Bean for Reservation -->
+    <managed-bean>
+        <managed-bean-name>reservation</managed-bean-name>
+        <managed-bean-class>com.ffhs.carsharing_v2.controllers.ReservationController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
     <!-- Navigation Rules from home.xhtml -->
     <navigation-rule>
         <from-view-id>/home.xhtml</from-view-id>
