@@ -19,7 +19,7 @@ public class LogoutController implements Serializable {
      * @return index.xhtml
      */
     public String logout() {
-        HttpSession session = SessionUtils.getSession();
+        HttpSession session = SessionUtils.getSessionFalse();
         session.invalidate();
         return "/index.xhtml?faces-redirect=true";
     }

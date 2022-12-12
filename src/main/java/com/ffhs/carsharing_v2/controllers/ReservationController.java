@@ -7,11 +7,10 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.List;
 
-import static com.ffhs.carsharing_v2.utilities.SessionUtils.getSession;
+import static com.ffhs.carsharing_v2.utilities.SessionUtils.getSessionFalse;
 
 @Named
 @SessionScoped
@@ -108,7 +107,7 @@ public class ReservationController implements Serializable {
 
         System.out.println(username);
 
-        if(valid && getSession().getAttribute("username").equals("admin")){
+        if(valid && getSessionFalse().getAttribute("username").equals("admin")){
             return "reservations.xhtml?faces-redirect=true";
         } else if (valid) {
             return "home.xhtml?faces-redirect=true";
@@ -129,7 +128,7 @@ public class ReservationController implements Serializable {
 
         boolean valid = ReservationHelper.createReservation(username, carId, startDate, endDate);
 
-        if(valid && getSession().getAttribute("username").equals("admin")){
+        if(valid && getSessionFalse().getAttribute("username").equals("admin")){
             return "reservations.xhtml?faces-redirect=true";
         } else if (valid) {
             return "home.xhtml?faces-redirect=true";

@@ -1,7 +1,7 @@
 package com.ffhs.carsharing_v2.dto;
 
 /**
- * Java Representation of the Cars table in the database
+ * Java Representation of the Cars Table in the Database carsharing
  *
  * @author Aris M. Accola and Andreas Schwyter
  */
@@ -15,14 +15,21 @@ public class Car {
     private String status;
 
     /**
-     * Constructor
+     * Constructor for object Car without parameters
+     */
+    public Car() {
+        super();
+    }
+
+    /**
+     * Constructor for object Car with parameters
      *
-     * @param carId the unique car id
+     * @param carId           the unique car id
      * @param carManufacturer manufacturer of the car
-     * @param carModel model of the car
-     * @param carType type of the car
-     * @param plateNumber the plate number of the car
-     * @param status the status of the car e.g. available - unavailable
+     * @param carModel        model of the car
+     * @param carType         type of the car
+     * @param plateNumber     the plate number of the car
+     * @param status          the status of the car e.g. available - unavailable
      */
     public Car(int carId, String carManufacturer, String carModel, String carType, String plateNumber, String status) {
         this.carId = carId;
@@ -31,10 +38,6 @@ public class Car {
         this.carType = carType;
         this.plateNumber = plateNumber;
         this.status = status;
-    }
-
-    public Car(){
-        super();
     }
 
     /**
@@ -66,6 +69,7 @@ public class Car {
 
     /**
      * Set Function for carManufacturer
+     *
      * @param carManufacturer set the car manufacturer
      */
     public void setCarManufacturer(String carManufacturer) {

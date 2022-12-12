@@ -8,13 +8,26 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+
+/**
+ * Java Filter to prevent access to files of folder sub-folder "admin"
+ * containing the admin panel
+ *
+ * @author Aris M. Accola and Andreas Schwyter
+ */
 @WebFilter(filterName = "adminfilter", urlPatterns = {"/admin/*"})
 public class AdminFilter implements Filter {
 
-    public AdminFilter(){}
+    /**
+     * Constructor of class Admin Filer
+     */
+    public AdminFilter() {
+        super();
+    }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -26,7 +39,7 @@ public class AdminFilter implements Filter {
 
             String user = ses.getAttribute("username").toString();
 
-            if (user.equals("admin")){
+            if (user.equals("admin")) {
                 chain.doFilter(request, response);
             } else {
                 resp.sendRedirect(reqt.getContextPath() + "/invalid.xhtml");
@@ -37,8 +50,7 @@ public class AdminFilter implements Filter {
     }
 
     @Override
-    public void destroy()
-    {
+    public void destroy() {
 
     }
 

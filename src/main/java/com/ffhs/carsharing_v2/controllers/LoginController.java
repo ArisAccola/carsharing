@@ -1,146 +1,114 @@
 package com.ffhs.carsharing_v2.controllers;
 
-import java.io.*;
-
 import com.ffhs.carsharing_v2.dto.User;
+import com.ffhs.carsharing_v2.helpers.LoginHelper;
+import com.ffhs.carsharing_v2.utilities.SessionUtils;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
-import jakarta.servlet.http.*;
+import jakarta.servlet.http.HttpSession;
 
-import com.ffhs.carsharing_v2.helpers.LoginHelper;
-import com.ffhs.carsharing_v2.utilities.SessionUtils;
+import java.io.Serializable;
 
 
+/**
+ * Java Managed Bean for Login
+ *
+ * @author Aris M. Accola and Andreas Schwyter
+ */
+@Named
+@SessionScoped
 public class LoginController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private int loginAttempts = 3;
+
+    /**
+     * Create local user object
+     */
     User userDTO = new User();
 
-    public User getUserDTO(){
+    /**
+     * Getter function for local user object
+     *
+     * @return user
+     */
+    public User getUserDTO() {
         return userDTO;
     }
 
+    /**
+     * Setter function for local user object
+     *
+     * @param user
+     */
     public void setUserDTO(User user) {
         this.userDTO = user;
     }
 
-    @Named
-    @SessionScoped
+    /**
+     * Constructor without parameters
+     */
+    public LoginController() {
+        super();
+    }
+
+    /**
+     * Managed Bean for Login
+     *
+     * @param username the username entered on the index.xhtml
+     * @param password the password entered on the index.xhtml
+     * @return admin.xhtml if login successful and user is admin,
+     * home.xhtml if login successfully or error message if login unsuccessful
+     */
     public String login(String username, String password) {
-        boolean valid = LoginHelper.validateUserLogin(username, password);
 
-        if (valid) {
-            HttpSession session = SessionUtils.getSession();
-            session.setAttribute("username", username);
+        /**
+         * Prevent Brut Force attack whilst limiting numbers to a maximum of 4 tries and if exceeded deactivate login
+         * form whilst LoginHelper is no longer involved and no request is sent to the backend.
+         */
+        if(loginAttempts > 0) {
 
-            if(username.equals("admin")){
-                return "/admin/admin.xhtml?faces-redirect=true";
+             /**
+             * Involve Helper Function to check whether username exists and password matches with username
+             * which returns true if user is found in the database and credential matches or false if username does
+             * not exist or credentials do not match
+             */
+            boolean valid = LoginHelper.validateUserLogin(username, password);
+
+            /**
+             *  if credential matches and user is admin proceed to admin.xhtml
+             *
+             *  if credential matches and user is not admin proceed to home.xhtml
+             *
+             *  on error show error message and retry
+             */
+            if (valid) {
+                HttpSession session = SessionUtils.getSessionFalse();
+                /**
+                 * Prevent Session Hijacking whilst invalidating current session and afterwards creating new session for
+                 * new user login
+                 */
+                session.invalidate();
+                session = SessionUtils.getSessionTrue();
+                session.setAttribute("username", username);
+
+                if (username.equals("admin")) {
+                    return "/admin/admin.xhtml?faces-redirect=true";
+                } else {
+                    return "home.xhtml?faces-redirect=true";
+                }
+
             } else {
-                return "home.xhtml?faces-redirect=true";
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username or Password, remaining attempts " + loginAttempts, "Please enter correct Username and Password"));
+                loginAttempts--;
             }
-
         } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Incorrect Username and Password", "Please enter correct Username and Password"));
-            return "index.xhtml?faces-redirect=true";
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login attempts have been exceeded and Login has been disabled", "To many login attempts have been recorded, login is blocked"));
         }
+        return null;
     }
 }
-
-/**
-     *
-     * Old version
-     *
-    private HttpSession session;
-    private String url;
-    private int loginAttempts;
-
-
-    public LoginController(){
-        super(); //Does nothing
-    }
-
-    protected void doGet (HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        
-        // User has clicked the logout link
-        session = request.getSession();
-
-        //check to make sure we have clicked link
-        if(request.getParameter("Logout") != null) {
-
-            //logout and redirect to homepage
-            logout();
-            url=INDEX_HTML;
-        }
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-    }
-
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-        throws ServletException, IOException {
-
-        //get our current session
-        session = request.getSession();
-
-        //get the numbers of logins
-        if (session.getAttribute("loginAttempts") == null) {
-            loginAttempts = 0;
-        }
-
-        //exceeded logins
-        if (loginAttempts > 2) {
-
-            String errorMessage = "Error: Number of Login Attemps Exceeded";
-            request.setAttribute("errorMessage", errorMessage);
-            url = INDEX_HTML;
-
-        } else {
-
-            //encrypt the password to check against what's stored in DB
-            PasswordService psw = new PasswordService();
-            String encryptedPass = psw.encrypt(password);
-
-            System.out.println(username);
-            System.out.println(password);
-            System.out.println(encryptedPass);
-
-            //create a user connect class to make databse calls, and call authentificate user method
-            UserHelper uc = new UserHelper();
-            User user = uc.authenticateUser(username, encryptedPass);
-            //User user = uc.authenticateUser("Admin", "jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=");
-
-
-            //we have found a user that matches the credentials
-            if (user != null) {
-
-                //invalidate current session, then get new session for our user (combat: sesson hijacking)
-                session.invalidate();
-                session = request.getSession(true);
-                session.setAttribute("username", user);
-                url = "userAccount.jsp";
-
-            } else {
-
-                //user doesn't exist, redirect to previous page and show error
-                String errorMessage = "Error: Unrecognized Username or Password <br> Login attempts remaining: " + (3 - (loginAttempts));
-                request.setAttribute("errorMessage", errorMessage);
-
-                //track login attempts (combat: brute force attacks)
-                session.setAttribute("loginAttempts", loginAttempts++);
-                url = INDEX_HTML;
-            }
-
-            return;
-        }
-
-        //forward our request along
-        RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
-    }
-} */
 

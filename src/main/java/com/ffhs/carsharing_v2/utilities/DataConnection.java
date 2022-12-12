@@ -5,6 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * Java utility class to connect to database and close the Connection with the database and close
+ * PreparedStatement und ResultSet used for database queries
+ *
+ * @author Aris M. Accola and Andreas Schwyter
+ */
 public class DataConnection {
     /**
      * @return connection or null
@@ -32,6 +38,8 @@ public class DataConnection {
     }
 
     /**
+     * Function to close connection which is used for connection to the database
+     *
      * @param connection Close Connection to Database
      */
     public static void close(Connection connection) {
@@ -45,7 +53,9 @@ public class DataConnection {
     }
 
     /**
-     * @param statement Close PreparedStatement used for Database Query
+     * Function to close PreparedStatement which is used for database query
+     *
+     * @param statement PreparedStatement used for database query
      */
     public static void close(PreparedStatement statement) {
         if (statement != null) {
@@ -58,6 +68,8 @@ public class DataConnection {
     }
 
     /**
+     * Function to close ResultSet which is used for database query
+     *
      * @param rs Close ResultSet used for Database Fetching
      */
     public static void close(ResultSet rs) {
